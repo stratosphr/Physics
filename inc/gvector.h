@@ -1,3 +1,6 @@
+#ifndef GVECTOR_H
+#define GVECTOR_H
+
 #include <iostream>
 #include <vector>
 
@@ -19,6 +22,10 @@ namespace gvector{
 
                 T operator[](const unsigned int index) const{
                     return m_values[index];
+                }
+
+                bool operator==(const GVector& vector2) const{
+                    return m_values == vector2.values();
                 }
 
                 GVector& operator<<(const T& value){
@@ -124,9 +131,15 @@ namespace gvector{
                     return m_values.size();
                 }
 
+                std::vector<T> values() const{
+                    return m_values;
+                }
+
             private:
                 std::vector<T> m_values;
 
         };
 
 }
+
+#endif
