@@ -15,7 +15,6 @@ int main(void){
     std::cout << v1[1] << std::endl;
 
     GBody body;
-    body.animate(v1);
 
     return 0;
 }
