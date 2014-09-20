@@ -4,6 +4,7 @@ BIN := bin
 SRC := src
 EXE := $(BIN)/exe
 GCC := g++
+GCC_ARGS := -Wall -Wextra
 SRC_FILES := $(wildcard $(SRC)/*.cpp) 
 OBJ_FILES := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SRC_FILES))
 TEMPLATE_CLASSES := $(INC)/gvector.h

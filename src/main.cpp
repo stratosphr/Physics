@@ -7,12 +7,12 @@ using namespace gvector;
 int main(void){
 
     GVector<float> v1, v2, v3;
-    v1 << 1 << 2 << 3 << endvector;
-    v2 << 3 << 2 << 1 << endvector;
+    v1 << 5 << -2 << 0 << endvector;
+    v2 << 7 << -6 << 0 << endvector;
     v1.display();
     v2.display();
-    v3 = 3.4 * v1;
-    v3.display();
+    int v = v1 * v2;
+    std::cout << v << std::endl;
 
     return 0;
 }
