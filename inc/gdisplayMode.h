@@ -7,7 +7,7 @@ class GDisplayMode{
 
     public:
 
-        GDisplayMode(int displayMode = GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE):
+        GDisplayMode(int displayMode = GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE | GLUT_ALPHA):
             m_displayMode(displayMode)
     {
     }
