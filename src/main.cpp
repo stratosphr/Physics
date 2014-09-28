@@ -1,7 +1,5 @@
 #include <iostream>
 #include "gvector.h"
-#include "gbody3d.h"
-#include "gshape3d.h"
 #include "gwindow.h"
 
 using namespace std;
