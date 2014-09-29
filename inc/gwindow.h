@@ -13,15 +13,15 @@ class GWindow{
 
     public:
 
-        static GWindow* singleton(const char* title, GPosition2D<int> position = GPosition2D<int>(), GDimension2D<int> dimension = GDimension2D<int>(), GDisplayMode displayMode = GDisplayMode()){
+        static GWindow* singleton(const char* title = "Title", GPosition2D<int> position = GPosition2D<int>(), GDimension2D<int> dimension = GDimension2D<int>(), GDisplayMode displayMode = GDisplayMode()){
             if(m_singleton == NULL){
                 m_singleton = new GWindow(title, position, dimension, displayMode);
             }
             return m_singleton;
         }
 
-        template<typename T> void clearColor(GColor<T> color){
-            glClearColor(color.red(), color.green(), color.blue(), 1);
+        template<typename T> void clearColor(GColor<T> color) const{
+            glClearColor(color.red(), color.green(), color.blue(), color.alpha());
         }
 
         void clear() const{
@@ -34,13 +34,34 @@ class GWindow{
             GWindow::m_displayFunction(m_singleton);
         }
 
-        void displayFunction(void (*displayFunction)(GWindow*)){
+        void displayFunction(void (*displayFunction)(GWindow*)) const{
             GWindow::m_displayFunction = displayFunction;
             glutDisplayFunc(GWindow::staticDisplayFunction);
         }
 
-        void show() const{
-            glutMainLoop();
+        void open() const{
+            if(GWindow::m_displayFunction == NULL){
+                GApplication::die("You must call GWindow::displayFunction(void (*displayFunction)(GWindow*)) and specify a display function before calling GWindow::open().");
+            }else{
+                glutMainLoop();
+            }
+        }
+
+        static void staticCloseFunction(){
+            GWindow::m_closeFunction(m_singleton);
+            if(GWindow::m_singleton != NULL){
+                delete GWindow::m_singleton;
+                GWindow::m_singleton = NULL;
+            }
+        }
+
+        void closeFunction(void (*closeFunction)(GWindow*)) const{
+            GWindow::m_closeFunction = closeFunction;
+            glutCloseFunc(GWindow::staticCloseFunction);
+        }
+
+        void close() const{
+            GWindow::staticCloseFunction();
         }
 
     private:
@@ -57,10 +78,12 @@ class GWindow{
 
         static GWindow* m_singleton;
         static void (*m_displayFunction)(GWindow*);
+        static void (*m_closeFunction)(GWindow*);
 
 };
 
 #endif
 
-void (*GWindow::m_displayFunction)(GWindow*) = NULL;
 GWindow* GWindow::m_singleton = NULL;
+void (*GWindow::m_displayFunction)(GWindow*) = NULL;
+void (*GWindow::m_closeFunction)(GWindow*) = NULL;
