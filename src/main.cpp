@@ -7,11 +7,15 @@ using namespace gvector;
 
 void displayFunction(GWindow* w){
     w->clear();
+    cout << "Display" << endl;
 }
 
 void closeFunction(GWindow* w){
-    w->clearColor(GColor<float>(0.5, 0, 0, 0));
-    w->clear();
+    cout << "Close" << endl;
+}
+
+void reshapeFunction(GWindow* w, GDimension2D<int> dimension){
+    cout << "Reshape" << endl;
 }
 
 int main(int argc, char* argv[]){
@@ -22,6 +26,7 @@ int main(int argc, char* argv[]){
     w->clearColor(GColor<float>(0, 0, 0, 0));
     w->displayFunction(displayFunction);
     w->closeFunction(closeFunction);
+    w->reshapeFunction(reshapeFunction);
 
     w->open();
 

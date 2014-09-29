@@ -64,6 +64,15 @@ class GWindow{
             GWindow::staticCloseFunction();
         }
 
+        static void staticReshapeFunction(int width, int height){
+            GWindow::m_reshapeFunction(m_singleton, GDimension2D<int>(width, height));
+        }
+
+        void reshapeFunction(void (*reshapeFunction)(GWindow*, GDimension2D<int>)){
+            GWindow::m_reshapeFunction = reshapeFunction;
+            glutReshapeFunc(GWindow::staticReshapeFunction);
+        }
+
     private:
 
         GWindow(const char* title, GPosition2D<int> position = GPosition2D<int>(), GDimension2D<int> dimensions = GDimension2D<int>(), GDisplayMode displayMode = GDisplayMode()){
@@ -79,6 +88,7 @@ class GWindow{
         static GWindow* m_singleton;
         static void (*m_displayFunction)(GWindow*);
         static void (*m_closeFunction)(GWindow*);
+        static void (*m_reshapeFunction)(GWindow*, GDimension2D<int>);
 
 };
 
@@ -87,3 +97,4 @@ class GWindow{
 GWindow* GWindow::m_singleton = NULL;
 void (*GWindow::m_displayFunction)(GWindow*) = NULL;
 void (*GWindow::m_closeFunction)(GWindow*) = NULL;
+void (*GWindow::m_reshapeFunction)(GWindow*, GDimension2D<int>) = NULL;
