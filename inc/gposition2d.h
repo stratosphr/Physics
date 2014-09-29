@@ -20,6 +20,14 @@ class GPosition2D{
             return m_y;
         }
 
+        void x(T x){
+            m_x = x;
+        }
+
+        void y(T y){
+            m_y = y;
+        }
+
     private:
 
         T m_x;

@@ -6,7 +6,6 @@ using namespace std;
 using namespace gvector;
 
 void displayFunction(GWindow* w){
-    w->clear();
     cout << "Display" << endl;
 }
 
@@ -21,12 +20,12 @@ void reshapeFunction(GWindow* w, GDimension2D<int> dimension){
 int main(int argc, char* argv[]){
 
     GApplication::initialize(&argc, argv);
-    GWindow* w = GWindow::singleton("Hello World");
+    GWindow* w = GWindow::singleton("Hello World", GPosition2D<int>(), GDimension2D<int>(500, 500));
 
     w->clearColor(GColor<float>(0, 0, 0, 0));
     w->displayFunction(displayFunction);
     w->closeFunction(closeFunction);
-    w->reshapeFunction(reshapeFunction);
+    w->reshapeFunction(GWindow::defaultReshapeFunction);
 
     w->open();
 

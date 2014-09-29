@@ -6,7 +6,7 @@ class GColor{
 
     public:
 
-        GColor(T red, T green, T blue, T alpha):
+        GColor(T red, T green, T blue, T alpha = 0):
             m_red(red),
             m_green(green),
             m_blue(blue),

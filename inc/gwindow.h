@@ -1,6 +1,7 @@
 #ifndef GWINDOW_H
 #define GWINDOW_H
 
+#include <iostream>
 #include "GL/freeglut.h"
 #include "gapplication.h"
 #include "gdisplayMode.h"
@@ -62,6 +63,19 @@ class GWindow{
 
         void close() const{
             GWindow::staticCloseFunction();
+        }
+
+        static void defaultReshapeFunction(GWindow* window, GDimension2D<int> dimensions){
+            window->clear();
+            if(dimensions.height() == 0){
+                dimensions.height(1);
+            }
+            float ratio = 1.0 * dimensions.width() / dimensions.height();
+            glMatrixMode(GL_PROJECTION);
+            glLoadIdentity();
+            glViewport(0, 0, dimensions.width(), dimensions.height());
+            gluPerspective(45, ratio, 0, 1000);
+            glMatrixMode(GL_MODELVIEW);
         }
 
         static void staticReshapeFunction(int width, int height){

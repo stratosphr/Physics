@@ -20,6 +20,14 @@ class GDimension2D{
             return m_height;
         }
 
+        void width(T width){
+            m_width = width;
+        }
+
+        void height(T height){
+            m_height = height;
+        }
+
     private:
 
         T m_width;
